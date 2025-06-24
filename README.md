@@ -1,41 +1,4 @@
-<!DOCTYPE html>/* Tambahkan di bagian <style> */
-.logo-container {
-  perspective: 1000px;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 20px;
-}
-
-.logo-flip {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: flip 5s infinite linear;
-}
-
-.logo-flip img {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: 50%;
-  backface-visibility: hidden;
-}
-
-.logo-front {
-  transform: rotateY(0deg);
-}
-
-.logo-back {
-  transform: rotateY(180deg);
-  opacity: 0.8;
-}
-
-@keyframes flip {
-  0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
-}
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -102,6 +65,13 @@
     .btn:hover {
       background: #1eba5a;
     }
+    .payment-info {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .payment-info strong {
+      color: #00e0ff;
+    }
   </style>
 </head>
 <body>
@@ -114,7 +84,19 @@
       <input type="text" id="nama" placeholder="Nama Lengkap" required />
       <input type="date" id="tanggal" required />
       <input type="time" id="jam" required />
+
+      <select id="pembayaran" required>
+        <option value="">Pilih Metode Pembayaran</option>
+        <option value="DANA (0895-1837-1444)">DANA (0895-1837-1444)</option>
+        <option value="Cash di Tempat">Cash di Tempat</option>
+      </select>
+
       <button class="btn" onclick="kirimBooking()">Kirim Reservasi via WhatsApp</button>
+    </div>
+
+    <div class="payment-info">
+      <p>Pembayaran bisa melalui:</p>
+      <p><strong>DANA: 0895-1837-1444</strong> atau <strong>Cash di tempat</strong></p>
     </div>
   </div>
 
@@ -123,14 +105,15 @@
       const nama = document.getElementById('nama').value;
       const tanggal = document.getElementById('tanggal').value;
       const jam = document.getElementById('jam').value;
+      const pembayaran = document.getElementById('pembayaran').value;
 
-      if (!nama || !tanggal || !jam) {
+      if (!nama || !tanggal || !jam || !pembayaran) {
         alert("Harap lengkapi semua data booking!");
         return;
       }
 
       const noWa = "6289518371444";
-      const pesan = `Halo HB Barbershop! Saya ingin reservasi potong rambut:\n\n👤 Nama: ${nama}\n📅 Tanggal: ${tanggal}\n🕒 Jam: ${jam}\n\nTerima kasih!`;
+      const pesan = `Halo HB Barbershop! Saya ingin reservasi potong rambut:\n\n👤 Nama: ${nama}\n📅 Tanggal: ${tanggal}\n🕒 Jam: ${jam}\n💳 Metode Pembayaran: ${pembayaran}\n\nTerima kasih!`;
       const url = `https://wa.me/${noWa}?text=${encodeURIComponent(pesan)}`;
 
       window.open(url, '_blank');
@@ -138,3 +121,4 @@
   </script>
 </body>
 </html>
+
