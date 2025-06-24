@@ -1,4 +1,41 @@
-<!DOCTYPE html>
+<!DOCTYPE html>/* Tambahkan di bagian <style> */
+.logo-container {
+  perspective: 1000px;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+}
+
+.logo-flip {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: flip 5s infinite linear;
+}
+
+.logo-flip img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  backface-visibility: hidden;
+}
+
+.logo-front {
+  transform: rotateY(0deg);
+}
+
+.logo-back {
+  transform: rotateY(180deg);
+  opacity: 0.8;
+}
+
+@keyframes flip {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
