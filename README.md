@@ -99,26 +99,74 @@
       <p><strong>DANA: 0895-1837-1444</strong> atau <strong>Cash di tempat</strong></p>
     </div>
   </div>
+<!-- ...Bagian sebelumnya tetap sama, hanya script di bawah yang diubah -->
+<script>
+  function kirimBooking() {
+    const nama = document.getElementById('nama').value;
+    const tanggal = document.getElementById('tanggal').value;
+    const jam = document.getElementById('jam').value;
+    const pembayaran = document.getElementById('pembayaran').value;
 
-  <script>
-    function kirimBooking() {
-      const nama = document.getElementById('nama').value;
-      const tanggal = document.getElementById('tanggal').value;
-      const jam = document.getElementById('jam').value;
-      const pembayaran = document.getElementById('pembayaran').value;
-
-      if (!nama || !tanggal || !jam || !pembayaran) {
-        alert("Harap lengkapi semua data booking!");
-        return;
-      }
-
-      const noWa = "6289518371444";
-      const pesan = `Halo HB Barbershop! Saya ingin reservasi potong rambut:\n\n👤 Nama: ${nama}\n📅 Tanggal: ${tanggal}\n🕒 Jam: ${jam}\n💳 Metode Pembayaran: ${pembayaran}\n\nTerima kasih!`;
-      const url = `https://wa.me/${noWa}?text=${encodeURIComponent(pesan)}`;
-
-      window.open(url, '_blank');
+    if (!nama || !tanggal || !jam || !pembayaran) {
+      alert("Harap lengkapi semua data booking!");
+      return;
     }
-  </script>
-</body>
-</html>
 
+    const bookingDateTime = new Date(`${tanggal}T${jam}`);
+    const now = new Date();
+    const selisihMs = bookingDateTime - now;
+
+    let countdownText = "";
+
+    if (selisihMs > 0) {
+      const selisihMenit = Math.floor(selisihMs / 60000);
+      const jamSisa = Math.floor(selisihMenit / 60);
+      const menitSisa = selisihMenit % 60;
+
+      countdownText = `\n⏳ Waktu menuju booking: ${jamSisa} jam ${menitSisa} menit lagi`;
+    } else {
+      countdownText = `\n⏳ Booking time sudah lewat atau kurang dari waktu saat ini.`;
+    }
+
+    const noWa = "6289518371444";
+    const pesan = `Halo HB Barbershop! Saya ingin reservasi potong rambut:\n\n👤 Nama: ${nama}\n📅 Tanggal: ${tanggal}\n🕒 Jam: ${jam}\n💳 Metode Pembayaran: ${pembayaran}${countdownText}\n\nTerima kasih!`;
+    const url = `https://wa.me/${noWa}?text=${encodeURIComponent(pesan)}`;
+
+    window.open(url, '_blank');
+  }
+
+<script>
+  function kirimBooking() {
+    const nama = document.getElementById('nama').value;
+    const tanggal = document.getElementById('tanggal').value;
+    const jam = document.getElementById('jam').value;
+    const pembayaran = document.getElementById('pembayaran').value;
+
+    if (!nama || !tanggal || !jam || !pembayaran) {
+      alert("Harap lengkapi semua data booking!");
+      return;
+    }
+
+    const bookingDateTime = new Date(`${tanggal}T${jam}`);
+    const now = new Date();
+    const selisihMs = bookingDateTime - now;
+
+    let countdownText = "";
+
+    if (selisihMs > 0) {
+      const selisihMenit = Math.floor(selisihMs / 60000);
+      const jamSisa = Math.floor(selisihMenit / 60);
+      const menitSisa = selisihMenit % 60;
+
+      countdownText = `\n⏳ Waktu menuju booking: ${jamSisa} jam ${menitSisa} menit lagi`;
+    } else {
+      countdownText = `\n⏳ Booking time sudah lewat atau kurang dari waktu saat ini.`;
+    }
+
+    const noWa = "6289518371444";
+    const pesan = `Halo HB Barbershop! Saya ingin reservasi potong rambut:\n\n👤 Nama: ${nama}\n📅 Tanggal: ${tanggal}\n🕒 Jam: ${jam}\n💳 Metode Pembayaran: ${pembayaran}${countdownText}\n\nTerima kasih!`;
+    const url = `https://wa.me/${noWa}?text=${encodeURIComponent(pesan)}`;
+
+    window.open(url, '_blank');
+  }
+</script>
