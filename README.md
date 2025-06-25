@@ -134,7 +134,8 @@
 
     window.open(url, '_blank');
   }
-
+<!-- ...Bagian sebelumnya tetap sama, hanya script di bawah yang diubah -->
+<script>
 <script>
   function kirimBooking() {
     const nama = document.getElementById('nama').value;
